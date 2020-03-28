@@ -4,8 +4,7 @@ import Browser
 import Html exposing (..)
 import Html.Events exposing (..)
 import Http exposing (Error(..), Metadata)
-import Json.Decode exposing (Decoder, field)
-import Task
+import Json.Decode as JsonD exposing (Decoder, field)
 import Data
 
 
@@ -40,7 +39,7 @@ type FetchState
 
 type alias User =
     { username : String
-    , rating : Int
+    , blitzRating : Int
     }
 
 
@@ -69,7 +68,7 @@ decodeUsers =
         userList =
             String.split "\n" Data.usersData
     in
-    List.map (\user -> Json.Decode.decodeString teamMemberDecoder user) userList
+    List.map (\user -> JsonD.decodeString teamMemberDecoder user) userList
         |> List.map
             (\result ->
                 case result of
@@ -80,7 +79,7 @@ decodeUsers =
                         Just value
             )
         |> List.filterMap identity
-        |> List.sortBy (\user -> user.rating)
+        |> List.sortBy (\user -> user.blitzRating)
         |> List.reverse
 
 
@@ -107,7 +106,7 @@ sortBy sortOrder index users =
                     List.sortBy (\u -> u.username)
 
                 1 ->
-                    List.sortBy (\u -> u.rating)
+                    List.sortBy (\u -> u.blitzRating)
 
                 _ ->
                     List.sortBy (\u -> u.username)
@@ -159,9 +158,7 @@ viewTeamData model =
                 ]
 
         Loading ->
-            div []
-                [ div [] [ button [ onClick Load ] [ text "Load" ] ]
-                ]
+            text "Loading ..."
 
         Success ->
             div []
@@ -178,7 +175,7 @@ viewTeamData model =
                                     tr []
                                         [ td [] [ text <| String.fromInt i ]
                                         , td [] [ text user.username ]
-                                        , td [] [ text <| String.fromInt user.rating ]
+                                        , td [] [ text <| String.fromInt user.blitzRating ]
                                         ]
                                 )
                                 model.users
@@ -194,12 +191,6 @@ viewTeamData model =
 teamUrl =
     "https://lichess.org/api/team/ksk-dr-lasker-1861-ev/users"
 
-
-teamUrlLocal =
-    "./users.json"
-
-
-
 {-
    getTeamDataAsString : Cmd Msg
    getTeamDataAsString =
@@ -212,13 +203,13 @@ teamUrlLocal =
 
 teamMemberDecoder : Decoder User
 teamMemberDecoder =
-    Json.Decode.map2
+    JsonD.map2
         (\username rating ->
             { username = username
-            , rating = rating
+            , blitzRating = rating
             }
         )
-        (field "username" Json.Decode.string)
-        (field "perfs" (field "blitz" (field "rating" Json.Decode.int)))
+        (field "username" JsonD.string)
+        (field "perfs" (field "blitz" (field "rating" JsonD.int)))
 
 

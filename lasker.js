@@ -5127,7 +5127,7 @@ var $author$project$Main$teamMemberDecoder = A3(
 	$elm$json$Json$Decode$map2,
 	F2(
 		function (username, rating) {
-			return {rating: rating, username: username};
+			return {blitzRating: rating, username: username};
 		}),
 	A2($elm$json$Json$Decode$field, 'username', $elm$json$Json$Decode$string),
 	A2(
@@ -5144,7 +5144,7 @@ var $author$project$Main$decodeUsers = function () {
 		A2(
 			$elm$core$List$sortBy,
 			function (user) {
-				return user.rating;
+				return user.blitzRating;
 			},
 			A2(
 				$elm$core$List$filterMap,
@@ -5194,7 +5194,7 @@ var $author$project$Main$sortBy = F3(
 				case 1:
 					return $elm$core$List$sortBy(
 						function (u) {
-							return u.rating;
+							return u.blitzRating;
 						});
 				default:
 					return $elm$core$List$sortBy(
@@ -5317,28 +5317,7 @@ var $author$project$Main$viewTeamData = function (model) {
 							]))
 					]));
 		case 'Loading':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$Load)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Load')
-									]))
-							]))
-					]));
+			return $elm$html$Html$text('Loading ...');
 		default:
 			return A2(
 				$elm$html$Html$div,
@@ -5472,7 +5451,7 @@ var $author$project$Main$viewTeamData = function (model) {
 															_List_fromArray(
 																[
 																	$elm$html$Html$text(
-																	$elm$core$String$fromInt(user.rating))
+																	$elm$core$String$fromInt(user.blitzRating))
 																]))
 														]));
 											}),
