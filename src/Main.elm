@@ -191,7 +191,7 @@ viewTeamData model =
                             :: List.indexedMap
                                 (\i user ->
                                     tr []
-                                        [ td [] [ text <| String.fromInt i ]
+                                        [ td [] [ text <| String.fromInt (i+1) ]
                                         , td [] [ text user.username ]
                                         , td [] [ text <| String.fromInt user.blitzRating ]
                                         ]

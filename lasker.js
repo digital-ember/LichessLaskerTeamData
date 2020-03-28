@@ -5513,7 +5513,7 @@ var $author$project$Main$viewTeamData = function (model) {
 															_List_fromArray(
 																[
 																	$elm$html$Html$text(
-																	$elm$core$String$fromInt(i))
+																	$elm$core$String$fromInt(i + 1))
 																])),
 															A2(
 															$elm$html$Html$td,
