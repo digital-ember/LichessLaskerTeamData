@@ -5270,6 +5270,8 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$table = _VirtualDom_node('table');
 var $elm$html$Html$td = _VirtualDom_node('td');
 var $author$project$Main$teamUrl = 'https://lichess.org/api/team/ksk-dr-lasker-1861-ev/users';
@@ -5362,75 +5364,137 @@ var $author$project$Main$viewTeamData = function (model) {
 									$elm$core$List$cons,
 									A2(
 										$elm$html$Html$tr,
-										_List_Nil,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'font-size', '20px')
+											]),
 										_List_fromArray(
 											[
 												A2(
 												$elm$html$Html$th,
-												_List_Nil,
 												_List_fromArray(
 													[
-														$elm$html$Html$text('Number')
-													])),
-												A2(
-												$elm$html$Html$th,
-												_List_Nil,
+														A2($elm$html$Html$Attributes$style, 'vertical-align', 'bottom')
+													]),
 												_List_fromArray(
 													[
-														$elm$html$Html$text('User name '),
 														A2(
-														$elm$html$Html$button,
+														$elm$html$Html$div,
 														_List_fromArray(
 															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Main$Sort, $author$project$Main$Asc, 0))
+																A2($elm$html$Html$Attributes$style, 'font-size', '14px')
 															]),
 														_List_fromArray(
 															[
-																$elm$html$Html$text('↑')
+																$elm$html$Html$text(
+																'total: ' + $elm$core$String$fromInt(
+																	$elm$core$List$length(model.users)))
 															])),
 														A2(
-														$elm$html$Html$button,
+														$elm$html$Html$div,
+														_List_Nil,
 														_List_fromArray(
 															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Main$Sort, $author$project$Main$Desc, 0))
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('↓')
+																$elm$html$Html$text('Number')
 															]))
 													])),
 												A2(
 												$elm$html$Html$th,
-												_List_Nil,
 												_List_fromArray(
 													[
-														$elm$html$Html$text('Blitz rating '),
-														$elm$html$Html$text(
-														'(⌀ ' + ($elm$core$String$fromInt(
-															$author$project$Main$userBlitzRatingAverage(model.users)) + ') ')),
+														A2($elm$html$Html$Attributes$style, 'vertical-align', 'bottom')
+													]),
+												_List_fromArray(
+													[
 														A2(
-														$elm$html$Html$button,
+														$elm$html$Html$div,
 														_List_fromArray(
 															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Main$Sort, $author$project$Main$Asc, 1))
+																A2($elm$html$Html$Attributes$style, 'font-size', '14px')
 															]),
 														_List_fromArray(
 															[
-																$elm$html$Html$text('↑')
+																$elm$html$Html$text('')
 															])),
 														A2(
-														$elm$html$Html$button,
+														$elm$html$Html$div,
+														_List_Nil,
 														_List_fromArray(
 															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Main$Sort, $author$project$Main$Desc, 1))
+																$elm$html$Html$text('User name '),
+																A2(
+																$elm$html$Html$button,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Events$onClick(
+																		A2($author$project$Main$Sort, $author$project$Main$Asc, 0))
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('🡅')
+																	])),
+																A2(
+																$elm$html$Html$button,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Events$onClick(
+																		A2($author$project$Main$Sort, $author$project$Main$Desc, 0))
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('🡇')
+																	]))
+															]))
+													])),
+												A2(
+												$elm$html$Html$th,
+												_List_fromArray(
+													[
+														A2($elm$html$Html$Attributes$style, 'vertical-align', 'bottom')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$div,
+														_List_fromArray(
+															[
+																A2($elm$html$Html$Attributes$style, 'font-size', '14px')
 															]),
 														_List_fromArray(
 															[
-																$elm$html$Html$text('↓')
+																$elm$html$Html$text(
+																'⌀: ' + $elm$core$String$fromInt(
+																	$author$project$Main$userBlitzRatingAverage(model.users)))
+															])),
+														A2(
+														$elm$html$Html$div,
+														_List_Nil,
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Blitz rating '),
+																A2(
+																$elm$html$Html$button,
+																_List_fromArray(
+																	[
+																		A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
+																		$elm$html$Html$Events$onClick(
+																		A2($author$project$Main$Sort, $author$project$Main$Asc, 1))
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('🡅')
+																	])),
+																A2(
+																$elm$html$Html$button,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Events$onClick(
+																		A2($author$project$Main$Sort, $author$project$Main$Desc, 1))
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('🡇')
+																	]))
 															]))
 													]))
 											])),
