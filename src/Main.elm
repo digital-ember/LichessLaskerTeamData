@@ -1,11 +1,11 @@
 module Main exposing (..)
 
 import Browser
+import Data
 import Html exposing (..)
 import Html.Events exposing (..)
 import Http exposing (Error(..), Metadata)
 import Json.Decode as JsonD exposing (Decoder, field)
-import Data
 
 
 
@@ -167,8 +167,17 @@ viewTeamData model =
                     [ table []
                         (tr []
                             [ th [] [ text "Number" ]
-                            , th [] [ text "User name", button [ onClick (Sort Asc 0) ] [ text "↑" ], button [ onClick (Sort Desc 0) ] [ text "↓" ] ]
-                            , th [] [ text "Blitz rating", button [ onClick (Sort Asc 1) ] [ text "↑" ], button [ onClick (Sort Desc 1) ] [ text "↓" ] ]
+                            , th []
+                                [ text "User name "
+                                , button [ onClick (Sort Asc 0) ] [ text "↑" ]
+                                , button [ onClick (Sort Desc 0) ] [ text "↓" ]
+                                ]
+                            , th []
+                                [ text "Blitz rating "
+                                , text <| "(⌀ " ++ String.fromInt (userBlitzRatingAverage model.users) ++ ") "
+                                , button [ onClick (Sort Asc 1) ] [ text "↑" ]
+                                , button [ onClick (Sort Desc 1) ] [ text "↓" ]
+                                ]
                             ]
                             :: List.indexedMap
                                 (\i user ->
@@ -183,6 +192,9 @@ viewTeamData model =
                     ]
                 ]
 
+userBlitzRatingAverage : List User -> Int
+userBlitzRatingAverage users =
+    List.foldl (\user sum -> sum + user.blitzRating) 0 users // List.length users
 
 
 -- HTTP
@@ -190,6 +202,8 @@ viewTeamData model =
 
 teamUrl =
     "https://lichess.org/api/team/ksk-dr-lasker-1861-ev/users"
+
+
 
 {-
    getTeamDataAsString : Cmd Msg
@@ -211,5 +225,3 @@ teamMemberDecoder =
         )
         (field "username" JsonD.string)
         (field "perfs" (field "blitz" (field "rating" JsonD.int)))
-
-

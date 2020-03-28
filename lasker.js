@@ -5275,6 +5275,16 @@ var $elm$html$Html$td = _VirtualDom_node('td');
 var $author$project$Main$teamUrl = 'https://lichess.org/api/team/ksk-dr-lasker-1861-ev/users';
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
+var $author$project$Main$userBlitzRatingAverage = function (users) {
+	return (A3(
+		$elm$core$List$foldl,
+		F2(
+			function (user, sum) {
+				return sum + user.blitzRating;
+			}),
+		0,
+		users) / $elm$core$List$length(users)) | 0;
+};
 var $author$project$Main$viewTeamData = function (model) {
 	var _v0 = model.fetchState;
 	switch (_v0.$) {
@@ -5367,7 +5377,7 @@ var $author$project$Main$viewTeamData = function (model) {
 												_List_Nil,
 												_List_fromArray(
 													[
-														$elm$html$Html$text('User name'),
+														$elm$html$Html$text('User name '),
 														A2(
 														$elm$html$Html$button,
 														_List_fromArray(
@@ -5396,7 +5406,10 @@ var $author$project$Main$viewTeamData = function (model) {
 												_List_Nil,
 												_List_fromArray(
 													[
-														$elm$html$Html$text('Blitz rating'),
+														$elm$html$Html$text('Blitz rating '),
+														$elm$html$Html$text(
+														'(⌀ ' + ($elm$core$String$fromInt(
+															$author$project$Main$userBlitzRatingAverage(model.users)) + ') ')),
 														A2(
 														$elm$html$Html$button,
 														_List_fromArray(
